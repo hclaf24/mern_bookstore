@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { apiRequest } from '../utils/api';
 import Spinner from '../components/Spinner';
 import { Link } from 'react-router-dom';
 import { MdOutlineAddBox, MdOutlineTableRows, MdOutlineApps } from 'react-icons/md';
@@ -13,8 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get('/api/books')
+    apiRequest({ method: 'get', url: '/api/books' })
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);

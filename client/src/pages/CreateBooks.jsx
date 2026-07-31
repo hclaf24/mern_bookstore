@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
-import axios from 'axios';
+import { apiRequest } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
@@ -20,8 +20,7 @@ const CreateBooks = () => {
       publishYear,
     };
     setLoading(true);
-    axios
-      .post('/api/books', data)
+    apiRequest({ method: 'post', url: '/api/books', data })
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Book created successfully', { variant: 'success' });
